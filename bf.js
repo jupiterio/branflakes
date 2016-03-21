@@ -25,7 +25,7 @@ var bf = function branflakes(code,maxloops,input){
 				result+=String.fromCharCode(memory[pointer]||0);
 				break;
 			case ",":
-				(input||function input(){throw "Not implemented"})(memory,pointer);
+				memory[pointer]=(input||function input(){throw "Not implemented"})(memory,pointer).charCodeAt(0)||0;
 				break;
 			case "[":
 				var found = [1];
