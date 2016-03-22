@@ -17,15 +17,17 @@ var bf = function branflakes(code,maxloops,input){
 				break;
 			case "+":
 				memory[pointer]=memory[pointer]==void(0)?1:memory[pointer]+1;
+				memory[pointer]=memory[pointer]==128?-128:memory[pointer]
 				break;
 			case "-":
 				memory[pointer]=memory[pointer]==void(0)?-1:memory[pointer]-1;
+				memory[pointer]=memory[pointer]==-129?127:memory[pointer]
 				break;
 			case ".":
 				result+=String.fromCharCode(memory[pointer]||0);
 				break;
 			case ",":
-				memory[pointer]=(input||function input(){throw "Not implemented"})(memory,pointer).charCodeAt(0)||0;
+				memory[pointer]=(input||function input(){console.log(result);throw "Not implemented"})(memory,pointer).charCodeAt(0)||0;
 				break;
 			case "[":
 				var found = [1];
@@ -34,7 +36,7 @@ var bf = function branflakes(code,maxloops,input){
 					if(code[k]=="]")found[0]--;
 					if(found[0]==0){found[1]=k;break;}
 				}
-				if(found[0]>0)throw "Missing "+found[0]+" ]s";
+				if(found[0]>0){console.log(result);throw "Missing "+found[0]+" ]s";}
 				if(memory[pointer]==0)i=found[1];
 				break;
 			case "]":
@@ -44,12 +46,12 @@ var bf = function branflakes(code,maxloops,input){
 					if(code[k]=="[")found[0]--;
 					if(found[0]==0){found[1]=k;break;}
 				}
-				if(found[0]>0)throw "Missing "+found[0]+" [s";
-				if(counter>maxloops)throw "Exceeded max loop repetition";
+				if(found[0]>0){console.log(result);throw "Missing "+found[0]+" [s";}
+				if(counter>maxloops){console.log(result);throw "Exceeded max loop repetition";}
 				if(memory[pointer]!=0){i=found[1];counter++;break;}
 				counter=0;
 				break;
 		}
 	}
 	return result;
-}
+};
