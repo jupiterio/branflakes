@@ -29,7 +29,7 @@ var bf = function branflakes(code,maxloops,input){
 		start=[],
 		end=[],
 		counter=0,
-		maxloops=maxloops||100;
+		maxloops=maxloops||1000;
 	for(var i=0;i<code.length;i++){
 		var cmd=code[i];
 		switch(cmd){
